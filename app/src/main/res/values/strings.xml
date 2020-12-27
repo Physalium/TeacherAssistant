@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TeacherAssistant</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_courses_text">Courses</string>
+    <string name="button_students_text">Students</string>
+    <string name="button_report_text">Generate report</string>
+    <string name="add_course_hint">Name of the course</string>
+    <string name="add_button">Add</string>
+    <string name="new_course">New course</string>
+</resources>

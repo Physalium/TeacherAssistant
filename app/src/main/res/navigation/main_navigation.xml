@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.teacherassistant.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_coursesListFragment"
+            app:destination="@id/coursesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursesListFragment"
+        android:name="com.example.teacherassistant.courses.CoursesListFragment"
+        android:label="CoursesListFragment"
+        tools:layout="@layout/courses_list_fragment">
+        <action
+            android:id="@+id/action_coursesListFragment_to_courseAddFragment"
+            app:destination="@id/courseAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseAddFragment"
+        android:name="com.example.teacherassistant.courses.CourseAddFragment"
+        android:label="CourseAddFragment"
+        tools:layout="@layout/fragment_course_add" />
+</navigation>
