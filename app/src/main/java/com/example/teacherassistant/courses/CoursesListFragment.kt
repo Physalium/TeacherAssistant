@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.teacherassistant.R
@@ -39,16 +40,23 @@ class CoursesListFragment : Fragment() {
 
 
         binding.coursesViewModel = coursesViewModel
-        val adapter = CourseListAdapter(coursesViewModel.courses)
-        coursesViewModel.courses.observe(viewLifecycleOwner, {
-            adapter.notifyDataSetChanged()
-        })
+        val adapter = CourseListAdapter { course ->
+            coursesViewModel.deleteCourse(course)
+        }
         binding.coursesList.adapter = adapter
+
+        coursesViewModel.courses.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         binding.addCourse.setOnClickListener { view ->
             view.findNavController()
-                .navigate(R.id.action_coursesListFragment_to_courseAddFragment)
+                .navigate(R.id.action_add_course)
         }
+
+
         return binding.root
     }
 

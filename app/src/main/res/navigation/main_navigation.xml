@@ -20,12 +20,33 @@
         android:label="CoursesListFragment"
         tools:layout="@layout/courses_list_fragment">
         <action
-            android:id="@+id/action_coursesListFragment_to_courseAddFragment"
+            android:id="@+id/action_add_course"
             app:destination="@id/courseAddFragment" />
+        <action
+            android:id="@+id/action_edit_course"
+            app:destination="@id/courseEditFragment">
+            <argument
+                android:name="course_id"
+                android:defaultValue="0" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/courseAddFragment"
         android:name="com.example.teacherassistant.courses.CourseAddFragment"
         android:label="CourseAddFragment"
         tools:layout="@layout/fragment_course_add" />
+    <fragment
+        android:id="@+id/courseEditFragment"
+        android:name="com.example.teacherassistant.courses.CourseEditFragment"
+        android:label="CourseEditFragment"
+        tools:layout="@layout/fragment_course_edit">
+        <argument
+            android:name="course_id"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="course_name"
+            android:defaultValue='""'
+            app:argType="string" />
+    </fragment>
 </navigation>

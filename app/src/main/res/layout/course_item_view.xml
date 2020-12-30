@@ -1,7 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:textSize="24sp" />
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="course"
+            type="com.example.teacherassistant.database.entities.Course" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/rowcourselist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9FA8DA"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/course_name"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{course.name}"
+            android:textColor="#FFFFFF"
+            tools:text="course name" />
+
+        <Button
+            android:id="@+id/course_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:insetRight="6dp"
+            android:text="@string/details" />
+
+        <Button
+            android:id="@+id/course_edit"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:insetRight="6dp"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:iconGravity="start"
+            app:iconPadding="0dp" />
+
+        <Button
+            android:id="@+id/course_delete"
+            android:layout_width="41dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:insetRight="6dp"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+    </LinearLayout>
+</layout>

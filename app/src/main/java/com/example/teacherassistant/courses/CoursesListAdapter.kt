@@ -2,27 +2,66 @@ package com.example.teacherassistant.courses
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.LiveData
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.teacherassistant.R
 import com.example.teacherassistant.database.entities.Course
+import com.example.teacherassistant.databinding.CourseItemViewBinding
 
 class CourseListAdapter(
-    var courses: LiveData<List<Course>>
-) : RecyclerView.Adapter<CourseListAdapter.CourseHolder>() {
-    inner class CourseHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
+    var deleteCallback: ((c: Course) -> Unit)
+) : ListAdapter<Course, CourseListAdapter.CourseHolder>(CoursesDiffCallback()) {
 
-    override fun onBindViewHolder(holder: CourseHolder, position: Int) {
-        val course = courses.value?.get(position)
-        holder.textView.text = course?.name
+
+    inner class CourseHolder(val binding: CourseItemViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Course) {
+            binding.course = item
+            binding.courseDelete.setOnClickListener {
+                if (item != null) deleteCallback(item)
+            }
+            binding.courseEdit.setOnClickListener {
+                val action =
+                    CoursesListFragmentDirections.actionEditCourse(item.id, item.name)
+                itemView.findNavController().navigate(action)
+            }
+            binding.executePendingBindings()
+        }
+
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.course_item_view, parent, false) as TextView
-        return CourseHolder(view)
+    override fun onBindViewHolder(holder: CourseListAdapter.CourseHolder, position: Int) {
+
+        val item = getItem(position)
+
+        holder.bind(item)
     }
 
-    override fun getItemCount(): Int = courses.value?.size ?: 0
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CourseListAdapter.CourseHolder {
+
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = CourseItemViewBinding.inflate(layoutInflater, parent, false)
+        return CourseHolder(binding)
+    }
+
+
+}
+
+class CoursesDiffCallback : DiffUtil.ItemCallback<Course>() {
+
+    override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+
+    override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
+        return oldItem == newItem
+    }
+
+
 }

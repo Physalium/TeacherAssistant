@@ -13,19 +13,25 @@ class CoursesViewModel(
 ) : ViewModel() {
 
     val database = dataSource
-    var currentCourse = Course(0, "")
     val courses = database.getAll()
 
-    suspend fun insert(course: Course) {
-        database.insert(course)
-    }
 
     fun addCourse(name: String) {
         viewModelScope.launch {
             val newCourse = Course(0, name)
-            insert(newCourse)
+            database.insert(newCourse)
         }
+    }
 
+    fun deleteCourse(course: Course) {
+        viewModelScope.launch {
+            database.delete(course)
+        }
+    }
 
+    fun updateCourse(course: Course, newName: String) {
+        viewModelScope.launch {
+            database.update(Course(course.id, newName))
+        }
     }
 }
