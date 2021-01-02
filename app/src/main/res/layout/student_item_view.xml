@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -8,12 +6,12 @@
     <data>
 
         <variable
-            name="course"
-            type="com.example.teacherassistant.database.entities.Course" />
+            name="student"
+            type="com.example.teacherassistant.database.entities.Student" />
     </data>
 
     <LinearLayout
-        android:id="@+id/rowcourselist"
+        android:id="@+id/student_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#9FA8DA"
@@ -21,24 +19,24 @@
 
 
         <TextView
-            android:id="@+id/course_name"
+            android:id="@+id/student_last_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingHorizontal="8dp"
-            android:text="@{course.name}"
+            android:text="@{student.lastName}"
             android:textColor="#FFFFFF"
-            tools:text="course name" />
+            tools:text="students last name" />
 
         <Button
-            android:id="@+id/course_details"
+            android:id="@+id/student_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:insetRight="6dp"
             android:text="@string/details" />
 
         <Button
-            android:id="@+id/course_edit"
+            android:id="@+id/student_edit"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -48,7 +46,7 @@
             app:iconPadding="0dp" />
 
         <Button
-            android:id="@+id/course_delete"
+            android:id="@+id/student_delete"
             android:layout_width="41dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"

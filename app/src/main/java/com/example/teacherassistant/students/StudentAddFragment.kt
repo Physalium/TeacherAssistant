@@ -1,4 +1,4 @@
-package com.example.teacherassistant.courses
+package com.example.teacherassistant.students
 
 import android.content.Context
 import android.os.Bundle
@@ -11,41 +11,47 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.teacherassistant.R
 import com.example.teacherassistant.database.TeacherAssistantDatabase
-import com.example.teacherassistant.databinding.FragmentCourseAddBinding
+import com.example.teacherassistant.databinding.FragmentStudentAddBinding
 import com.google.android.material.snackbar.Snackbar
 
 
-class CourseAddFragment : Fragment() {
-    private lateinit var binding: FragmentCourseAddBinding
+class StudentAddFragment : Fragment() {
+    private lateinit var binding: FragmentStudentAddBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_course_add,
+            R.layout.fragment_student_add,
             container,
             false
         )
         val application = requireNotNull(this.activity).application
-        val dataSource = TeacherAssistantDatabase.getInstance(application).courseDao
-        val viewModelFactory = CoursesViewModelFactory(dataSource, application)
+        val dataSource = TeacherAssistantDatabase.getInstance(application).studentDao
+        val viewModelFactory = StudentsViewModelFactory(dataSource, application)
 
 
-        val coursesViewModel =
+        val studentsViewModel =
             ViewModelProvider(
                 this, viewModelFactory
-            ).get(CoursesViewModel::class.java)
+            ).get(StudentsViewModel::class.java)
 
 
-        binding.coursesViewModel = coursesViewModel
+        binding.studentsViewModel = studentsViewModel
         binding.addButton.setOnClickListener {
-            coursesViewModel.addCourse(binding.name.text.toString())
-            binding.name.text.clear()
+            studentsViewModel.addStudent(
+                binding.firstName.text.toString(),
+                binding.lastName.text.toString()
+            )
+            binding.firstName.text.clear()
+            binding.lastName.text.clear()
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
-            Snackbar.make(binding.root, "The course has been added.", Snackbar.LENGTH_SHORT)
+            Snackbar.make(binding.root, "The student has been added.", Snackbar.LENGTH_SHORT)
                 .show()
         }
         return binding.root
