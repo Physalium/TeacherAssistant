@@ -32,6 +32,9 @@
                 android:name="course_id"
                 android:defaultValue="0" />
         </action>
+        <action
+            android:id="@+id/action_course_details"
+            app:destination="@id/courseDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/courseAddFragment"
@@ -85,5 +88,32 @@
         android:name="com.example.teacherassistant.students.StudentAddFragment"
         android:label="StudentAddFragment"
         tools:layout="@layout/fragment_course_add" />
+    <fragment
+        android:id="@+id/courseDetailsFragment"
+        android:name="com.example.teacherassistant.courses.CourseDetailsFragment"
+        android:label="CourseDetailsFragment"
+        tools:layout="@layout/fragment_course_details">
+        <argument
+            android:name="course_id"
+            app:argType="integer" />
+        <argument
+            android:name="course_name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_course_add_student"
+            app:destination="@id/courseAddStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseAddStudentFragment"
+        android:name="com.example.teacherassistant.courses.CourseAddStudentFragment"
+        android:label="CourseAddStudentFragment"
+        tools:layout="@layout/fragment_course_add_student">
+        <argument
+            android:name="course_name"
+            app:argType="string" />
+        <argument
+            android:name="course_id"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

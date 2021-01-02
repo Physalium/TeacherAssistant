@@ -19,7 +19,6 @@ import com.google.android.material.snackbar.Snackbar
 
 class CourseEditFragment : Fragment() {
     private lateinit var binding: FragmentCourseEditBinding
-    private lateinit var viewModel: CoursesViewModel
     val args: CourseEditFragmentArgs by navArgs()
 
 

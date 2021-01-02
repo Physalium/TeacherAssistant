@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.teacherassistant.database.dao.CourseDao
+import com.example.teacherassistant.database.dao.StudentCourseDao
 import com.example.teacherassistant.database.dao.StudentDao
 import com.example.teacherassistant.database.entities.Course
 import com.example.teacherassistant.database.entities.Grade
@@ -17,13 +18,14 @@ import com.example.teacherassistant.database.entities.StudentAndCourse
         Course::class,
         StudentAndCourse::class,
         Grade::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class TeacherAssistantDatabase : RoomDatabase() {
 
     abstract val courseDao: CourseDao
     abstract val studentDao: StudentDao
+    abstract val studentCourseDao: StudentCourseDao
 
     companion object {
 

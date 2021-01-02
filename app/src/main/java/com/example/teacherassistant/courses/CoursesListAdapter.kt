@@ -26,6 +26,11 @@ class CourseListAdapter(
                     CoursesListFragmentDirections.actionEditCourse(item.id, item.name)
                 itemView.findNavController().navigate(action)
             }
+
+            binding.courseDetails.setOnClickListener {
+                val action = CoursesListFragmentDirections.actionCourseDetails(item.id, item.name)
+                itemView.findNavController().navigate(action)
+            }
             binding.executePendingBindings()
         }
 

@@ -5,7 +5,6 @@
 
     <data>
 
-
         <variable
             name="studentAndCourseViewModel"
             type="com.example.teacherassistant.studentcourse.StudentAndCourseViewModel" />
@@ -13,37 +12,22 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="views.CourseDetailsFragment">
-
-
-        <Button
-            android:id="@+id/course_details_add_student"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/add_student"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.894"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_details_name" />
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/course_details_name"
+            android:id="@+id/course_add_student_course_name"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-
+            android:layout_marginTop="16dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Name of the course" />
+            tools:text="The name of the course" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/course_details_students_in_course_list"
+            android:id="@+id/course_add_student_students_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -52,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_details_add_student" />
+            app:layout_constraintTop_toBottomOf="@+id/course_add_student_course_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

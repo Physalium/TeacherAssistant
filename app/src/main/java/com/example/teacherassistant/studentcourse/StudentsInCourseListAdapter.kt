@@ -1,42 +1,36 @@
-package com.example.teacherassistant.students
+package com.example.teacherassistant.studentcourse
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teacherassistant.database.entities.Student
-import com.example.teacherassistant.databinding.StudentItemViewBinding
+import com.example.teacherassistant.databinding.StudentInCourseItemViewBinding
+import com.example.teacherassistant.students.StudentsDiffCallback
 
-class StudentsListAdapter(
+class StudentsInCourseListAdapter(
     var deleteCallback: ((c: Student) -> Unit)
-) : ListAdapter<Student, StudentsListAdapter.StudentHolder>(StudentsDiffCallback()) {
+) : ListAdapter<Student, StudentsInCourseListAdapter.StudentHolder>(StudentsDiffCallback()) {
 
-
-    inner class StudentHolder(val binding: StudentItemViewBinding) :
+    inner class StudentHolder(val binding: StudentInCourseItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Student) {
             binding.student = item
-            binding.studentDelete.setOnClickListener {
-                if (item != null) deleteCallback(item)
+            binding.courseStudentDelete.setOnClickListener {
+                deleteCallback(item)
             }
-            binding.studentEdit.setOnClickListener {
-                val action =
-                    StudentsListFragmentDirections.actionEditStudent(
-                        item.id,
-                        item.firstName,
-                        item.lastName
-                    )
-                itemView.findNavController().navigate(action)
-            }
+
             binding.executePendingBindings()
         }
 
 
     }
 
-    override fun onBindViewHolder(holder: StudentsListAdapter.StudentHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: StudentsInCourseListAdapter.StudentHolder,
+        position: Int
+    ) {
 
         val item = getItem(position)
 
@@ -46,10 +40,10 @@ class StudentsListAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): StudentsListAdapter.StudentHolder {
+    ): StudentsInCourseListAdapter.StudentHolder {
 
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = StudentItemViewBinding.inflate(layoutInflater, parent, false)
+        val binding = StudentInCourseItemViewBinding.inflate(layoutInflater, parent, false)
         return StudentHolder(binding)
     }
 
