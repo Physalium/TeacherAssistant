@@ -1,4 +1,4 @@
-package com.example.teacherassistant.courses
+package com.example.teacherassistant.students
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,22 +11,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.teacherassistant.R
 import com.example.teacherassistant.database.TeacherAssistantDatabase
-import com.example.teacherassistant.databinding.FragmentCourseAddStudentBinding
+import com.example.teacherassistant.databinding.FragmentStudentDetailsBinding
 import com.example.teacherassistant.studentcourse.StudentAndCourseViewModel
 import com.example.teacherassistant.studentcourse.StudentAndCourseViewModelFactory
-import com.example.teacherassistant.studentcourse.StudentInCourseAddListAdapter
+import com.example.teacherassistant.studentcourse.StudentCoursesListAdapter
 
-
-class CourseAddStudentFragment : Fragment() {
-    private lateinit var binding: FragmentCourseAddStudentBinding
-    val args: CourseAddStudentFragmentArgs by navArgs()
+class StudentDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentStudentDetailsBinding
+    val args: StudentDetailsFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_course_add_student,
+            R.layout.fragment_student_details,
             container,
             false
         )
@@ -34,7 +34,7 @@ class CourseAddStudentFragment : Fragment() {
         val dataSource = TeacherAssistantDatabase.getInstance(application).studentCourseDao
 
         val studentAndCourseViewModelFactory =
-            StudentAndCourseViewModelFactory(dataSource, application, args.courseId, null)
+            StudentAndCourseViewModelFactory(dataSource, application, null, args.studentId)
 
 
         val studentAndCourseViewModel =
@@ -43,19 +43,20 @@ class CourseAddStudentFragment : Fragment() {
             ).get(StudentAndCourseViewModel::class.java)
 
         binding.studentAndCourseViewModel = studentAndCourseViewModel
-        binding.courseAddStudentCourseName.text = args.courseName
+        binding.studentDetailsStudentFirstName.text = args.studentFirstName
+        binding.studentDetailsStudentLastName.text = args.studentLastName
 
-        val adapter = StudentInCourseAddListAdapter { student ->
-            studentAndCourseViewModel.addStudentToCourse(student.id, args.courseId)
+        val adapter = StudentCoursesListAdapter { course ->
+            studentAndCourseViewModel.deleteStudentFromCourse(args.studentId, course.id)
         }
-        binding.courseAddStudentStudentsList.adapter = adapter
 
-        studentAndCourseViewModel.studentsNotInCourse?.observe(viewLifecycleOwner, Observer {
+        binding.studentDetailsCourseList.adapter = adapter
+
+        studentAndCourseViewModel.studentCourses?.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
         })
-
 
         return binding.root
     }

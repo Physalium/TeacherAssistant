@@ -9,13 +9,15 @@ import kotlinx.coroutines.launch
 
 class StudentAndCourseViewModel(
     dataSource: StudentCourseDao,
-    course_id: Int,
+    course_id: Int?,
+    student_id: Int?,
     application: Application
 ) : ViewModel() {
 
     val database = dataSource
-    val studentsInCourse = database.getByCourseId(course_id)
-    val studentsNotInCourse = database.getNotInCourseById(course_id)
+    val studentsInCourse = course_id?.let { database.getByCourseId(it) }
+    val studentsNotInCourse = course_id?.let { database.getNotInCourseById(it) }
+    val studentCourses = student_id?.let { database.getCoursesForStudent(it) }
 
     fun addStudentToCourse(student_id: Int, course_id: Int) {
         viewModelScope.launch {

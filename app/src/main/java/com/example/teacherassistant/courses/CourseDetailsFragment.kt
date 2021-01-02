@@ -37,7 +37,7 @@ class CourseDetailsFragment : Fragment() {
         val dataSource = TeacherAssistantDatabase.getInstance(application).studentCourseDao
 
         val studentAndCourseViewModelFactory =
-            StudentAndCourseViewModelFactory(dataSource, application, args.courseId)
+            StudentAndCourseViewModelFactory(dataSource, application, args.courseId, null)
 
 
         val studentAndCourseViewModel =
@@ -54,7 +54,7 @@ class CourseDetailsFragment : Fragment() {
 
         binding.courseDetailsStudentsInCourseList.adapter = adapter
 
-        studentAndCourseViewModel.studentsInCourse.observe(viewLifecycleOwner, Observer {
+        studentAndCourseViewModel.studentsInCourse?.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }

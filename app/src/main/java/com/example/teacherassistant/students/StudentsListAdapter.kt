@@ -21,6 +21,15 @@ class StudentsListAdapter(
             binding.studentDelete.setOnClickListener {
                 if (item != null) deleteCallback(item)
             }
+            binding.studentDetails.setOnClickListener {
+                val action =
+                    StudentsListFragmentDirections.actionDetailsStudent(
+                        item.id,
+                        item.firstName,
+                        item.lastName
+                    )
+                itemView.findNavController().navigate(action)
+            }
             binding.studentEdit.setOnClickListener {
                 val action =
                     StudentsListFragmentDirections.actionEditStudent(

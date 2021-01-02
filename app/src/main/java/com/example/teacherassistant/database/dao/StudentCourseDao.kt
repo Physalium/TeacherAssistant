@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.teacherassistant.database.entities.Course
 import com.example.teacherassistant.database.entities.Student
 import com.example.teacherassistant.database.entities.StudentAndCourse
 
@@ -24,4 +25,7 @@ interface StudentCourseDao {
 
     @Query("SELECT * FROM student_table WHERE id NOT IN (SELECT student_id FROM student_course_table WHERE course_id = :course_id)")
     fun getNotInCourseById(course_id: Int): LiveData<List<Student>>
+
+    @Query("SELECT * FROM course_table WHERE id IN (SELECT course_id FROM student_course_table WHERE student_id = :student_id)")
+    fun getCoursesForStudent(student_id: Int): LiveData<List<Course>>
 }

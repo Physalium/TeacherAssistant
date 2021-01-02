@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_edit_student"
             app:destination="@id/studentEditFragment" />
+        <action
+            android:id="@+id/action_details_student"
+            app:destination="@id/studentDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentEditFragment"
@@ -114,6 +117,22 @@
         <argument
             android:name="course_id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentDetailsFragment"
+        android:name="com.example.teacherassistant.students.StudentDetailsFragment"
+        android:label="fragment_student_details"
+        tools:layout="@layout/fragment_student_details">
+
+        <argument
+            android:name="student_id"
+            app:argType="integer" />
+        <argument
+            android:name="student_first_name"
+            app:argType="string" />
+        <argument
+            android:name="student_last_name"
+            app:argType="string" />
     </fragment>
 
 </navigation>
