@@ -6,48 +6,58 @@
     <data>
 
         <variable
-            name="studentAndCourseViewModel"
-            type="com.example.teacherassistant.studentcourse.StudentAndCourseViewModel" />
+            name="gradesViewModel"
+            type="com.example.teacherassistant.grades.GradesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="views.StudentDetailsFragment">
-
+        tools:context="views.GradesStudentInCourseFragment">
 
         <TextView
-            android:id="@+id/student_details_student_first_name"
+            android:id="@+id/grades_course_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.065"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Last name of the student" />
-
+            tools:text="The name of the course" />
 
         <TextView
-            android:id="@+id/student_details_student_last_name"
+            android:id="@+id/grades_student_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grades_course_name"
+            tools:text="The name of the student" />
+
+        <Button
+            android:id="@+id/add_grade"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
+            android:text="@string/add_grade"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/student_details_student_first_name"
-            tools:text="First name of the student" />
+            app:layout_constraintTop_toBottomOf="@+id/grades_student_name" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/student_details_course_list"
+            android:id="@+id/grades_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -55,9 +65,9 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/student_details_student_last_name" />
-
+            app:layout_constraintTop_toBottomOf="@+id/add_grade" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

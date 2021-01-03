@@ -46,9 +46,9 @@ class StudentDetailsFragment : Fragment() {
         binding.studentDetailsStudentFirstName.text = args.studentFirstName
         binding.studentDetailsStudentLastName.text = args.studentLastName
 
-        val adapter = StudentCoursesListAdapter { course ->
+        val adapter = StudentCoursesListAdapter({ course ->
             studentAndCourseViewModel.deleteStudentFromCourse(args.studentId, course.id)
-        }
+        }, args.studentId, "${args.studentFirstName} ${args.studentLastName}")
 
         binding.studentDetailsCourseList.adapter = adapter
 

@@ -105,6 +105,9 @@
         <action
             android:id="@+id/action_course_add_student"
             app:destination="@id/courseAddStudentFragment" />
+        <action
+            android:id="@+id/action_course_to_grades"
+            app:destination="@id/studentWithCourseGradesFragment" />
     </fragment>
     <fragment
         android:id="@+id/courseAddStudentFragment"
@@ -133,6 +136,42 @@
         <argument
             android:name="student_last_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_student_to_grades"
+            app:destination="@id/studentWithCourseGradesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentWithCourseGradesFragment"
+        android:name="com.example.teacherassistant.grades.StudentWithCourseGradesFragment"
+        android:label="StudentWithCourseGradesFragment"
+        tools:layout="@layout/fragment_student_with_course_grades">
+        <argument
+            android:name="student_id"
+            app:argType="integer" />
+        <argument
+            android:name="course_id"
+            app:argType="integer" />
+        <argument
+            android:name="course_name"
+            app:argType="string" />
+        <argument
+            android:name="student_name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_add_grade"
+            app:destination="@id/gradeAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gradeAddFragment"
+        android:name="com.example.teacherassistant.grades.GradeAddFragment"
+        android:label="GradeAddFragment"
+        tools:layout="@layout/fragment_grade_add">
+        <argument
+            android:name="student_id"
+            app:argType="integer" />
+        <argument
+            android:name="course_id"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

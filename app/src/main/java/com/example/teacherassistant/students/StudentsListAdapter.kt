@@ -39,6 +39,8 @@ class StudentsListAdapter(
                     )
                 itemView.findNavController().navigate(action)
             }
+
+
             binding.executePendingBindings()
         }
 

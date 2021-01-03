@@ -2,15 +2,17 @@ package com.example.teacherassistant.studentcourse
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.teacherassistant.courses.CourseDetailsFragmentDirections
 import com.example.teacherassistant.database.entities.Student
 import com.example.teacherassistant.databinding.StudentInCourseItemViewBinding
 import com.example.teacherassistant.students.StudentsDiffCallback
 
 class StudentsInCourseListAdapter(
-    var deleteCallback: ((c: Student) -> Unit)
+    var deleteCallback: ((c: Student) -> Unit), var course_id: Int, var course_name: String
 ) : ListAdapter<Student, StudentsInCourseListAdapter.StudentHolder>(StudentsDiffCallback()) {
 
     inner class StudentHolder(val binding: StudentInCourseItemViewBinding) :
@@ -21,6 +23,13 @@ class StudentsInCourseListAdapter(
                 deleteCallback(item)
             }
 
+            binding.studentGrades.setOnClickListener {
+                val action =
+                    CourseDetailsFragmentDirections.actionCourseToGrades(
+                        item.id, course_id, course_name, "${item.firstName} ${item.lastName}"
+                    )
+                itemView.findNavController().navigate(action)
+            }
             binding.executePendingBindings()
         }
 

@@ -20,6 +20,9 @@ interface StudentCourseDao {
     @Query("DELETE FROM student_course_table WHERE student_id = :student_id AND course_id = :course_id")
     suspend fun delete(course_id: Int, student_id: Int)
 
+    @Query("SELECT * FROM student_course_table WHERE course_id ==:courseId AND student_id == :studentId LIMIT 1")
+    suspend fun getByStudentAndCourse(courseId: Int, studentId: Int): StudentAndCourse
+
     @Query("SELECT * FROM student_table WHERE id IN (SELECT student_id FROM student_course_table WHERE course_id = :course_id)")
     fun getByCourseId(course_id: Int): LiveData<List<Student>>
 
