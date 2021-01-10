@@ -18,6 +18,8 @@ interface GradeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(grade: Grade)
 
+    @Query("SELECT * FROM grade_table WHERE DATE(date/1000,'unixepoch')>= DATE('now', '-1 days')  ")
+    fun getAllFromToday(): List<Grade>
 
     @Query("DELETE FROM grade_table WHERE id = :grade_id")
     suspend fun delete(grade_id: Int)

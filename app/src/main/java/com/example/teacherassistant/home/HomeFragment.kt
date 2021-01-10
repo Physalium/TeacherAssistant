@@ -34,6 +34,10 @@ class HomeFragment : Fragment() {
             view.findNavController()
                 .navigate(R.id.action_homeFragment_to_studentsListFragment)
         }
+
+        binding.buttonReport.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_homeFragment_to_reportFragment)
+        }
         return binding.root
 
     }

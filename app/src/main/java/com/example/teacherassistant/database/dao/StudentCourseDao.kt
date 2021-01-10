@@ -31,4 +31,10 @@ interface StudentCourseDao {
 
     @Query("SELECT * FROM course_table WHERE id IN (SELECT course_id FROM student_course_table WHERE student_id = :student_id)")
     fun getCoursesForStudent(student_id: Int): LiveData<List<Course>>
+
+    @Query("select lastName from student_table where id in (select student_id from student_course_table where id=:studentCourseId)")
+    fun getStudentLastName(studentCourseId: Int): String
+
+    @Query("select name from course_table where id in (select course_id from student_course_table where id=:studentCourseId)")
+    fun getCourseName(studentCourseId: Int): String
 }
